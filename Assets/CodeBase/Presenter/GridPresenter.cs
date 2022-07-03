@@ -31,9 +31,9 @@ namespace Assets.CodeBase.Presenter
             _model.Changed -= LettersChanged;
         }
 
-        private void LettersChanged(IReadOnlyList<Letter> letters)
+        private void LettersChanged(IReadOnlyList<Letter> letters, int width, int height)
         {
-            _view.Show(letters);
+            _view.Show(letters, width, height);
         }
 
         private void MixGrid()

@@ -8,6 +8,7 @@ namespace Assets.CodeBase.Infrastructure
     public class GridSetup : MonoBehaviour
     {
         [SerializeField] private GridView _view;
+        [SerializeField] private UIFactory _uIFactory;
 
         private GridPresenter _presenter;
         private GridModel _model;
@@ -16,6 +17,7 @@ namespace Assets.CodeBase.Infrastructure
         {
             _model = new GridModel();
             _presenter = new GridPresenter(_view, _model);
+            _view.Construct(_uIFactory);
         }
 
         private void OnEnable() => 

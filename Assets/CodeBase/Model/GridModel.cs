@@ -14,7 +14,7 @@ namespace Assets.CodeBase.Model
             _random = new Random();
         }
 
-        public event Action<IReadOnlyList<Letter>> Changed;
+        public event Action<IReadOnlyList<Letter>, int, int> Changed;
 
         internal void Mix()
         {
@@ -28,7 +28,7 @@ namespace Assets.CodeBase.Model
                 _letters[i] = temp;
             }
 
-            Changed?.Invoke(_letters);
+            //Changed?.Invoke(_letters);
         }
 
         internal void Generate(int width, int height)
@@ -39,7 +39,7 @@ namespace Assets.CodeBase.Model
             for (int i = 0; i < count; i++)
                 _letters.Add(Letter.GetRandom(_random));
 
-            Changed?.Invoke(_letters);
+            Changed?.Invoke(_letters, width, height);
         }
     }
 }
