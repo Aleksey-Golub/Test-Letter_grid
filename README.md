@@ -1,2 +1,1 @@
-# Test-Letter_grid
- 
+see "ТЗ.pdf" in Assets folder
