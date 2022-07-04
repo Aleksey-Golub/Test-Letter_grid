@@ -1,8 +1,9 @@
-﻿using Assets.CodeBase.View;
+﻿using Assets.CodeBase.Model;
+using Assets.CodeBase.View;
 using System.Collections.Generic;
 using UnityEngine;
 
-namespace Assets.CodeBase.Infrastructure
+namespace Assets.CodeBase.Services
 {
     [CreateAssetMenu]
     public class UIFactory : ScriptableObject, IUIFactory
@@ -11,7 +12,7 @@ namespace Assets.CodeBase.Infrastructure
 
         private readonly Stack<LetterView> _pool = new Stack<LetterView>();
 
-        public LetterView GetLetter(RectTransform at, string symbol, float textSize)
+        public LetterView GetLetter(RectTransform at, Letter model, float textSize)
         {
             LetterView newLetterView;
             if (_pool.Count > 0)
@@ -22,7 +23,7 @@ namespace Assets.CodeBase.Infrastructure
             newLetterView.gameObject.SetActive(true);
             newLetterView.transform.SetParent(at, false);
 
-            newLetterView.Construct(symbol, textSize);
+            newLetterView.Construct(model, textSize);
 
             return newLetterView;
         }

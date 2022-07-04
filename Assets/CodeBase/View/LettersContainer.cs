@@ -7,5 +7,17 @@ namespace Assets.CodeBase.View
     {
         [field: SerializeField] public RectTransform RectTransform { get; private set; }
         [field: SerializeField] public GridLayoutGroup GridLayoutGroup { get; private set; }
+
+        public Vector2 DefaultSize { get; private set; }
+
+        public void Construct()
+        {
+            DefaultSize = RectTransform.sizeDelta;
+        }
+
+        public void SetLayout(bool value)
+        {
+            GridLayoutGroup.enabled = value;
+        }
     }
 }

@@ -26,8 +26,8 @@ namespace Assets.CodeBase.View
                 }
             }
 
-            _inputField.text = "1";
             Value = 1;
+            _inputField.text = Value.ToString();
         }
     }
 }

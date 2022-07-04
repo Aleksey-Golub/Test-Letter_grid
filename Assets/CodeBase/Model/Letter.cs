@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Assets.CodeBase.Data;
+using System;
 
 namespace Assets.CodeBase.Model
 {
@@ -12,7 +13,8 @@ namespace Assets.CodeBase.Model
         }
 
         public string Litera { get; }
-
+        public Vector3Data Position { get; set; }
+        
         internal static Letter GetRandom(Random _random)
         {
             int index = _random.Next(_symbols.Length);

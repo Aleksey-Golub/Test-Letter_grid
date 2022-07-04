@@ -9,7 +9,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 78381bf5fb317e942b20f9995cd303b3, type: 3}
+  m_Script: {fileID: 11500000, guid: 14ad51e1f41ccec4a8d4f2cf0cb0336b, type: 3}
   m_Name: UI Factory
   m_EditorClassIdentifier: 
   _prefab: {fileID: 1635652377106944189, guid: 44d1d2c27e1d6d24c9d17034b1ad5945, type: 3}
