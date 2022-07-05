@@ -7,6 +7,6 @@ namespace Assets.CodeBase.Services
     public interface IUIFactory
     {
         void Recycle(LetterView view);
-        LetterView GetLetter(RectTransform at, Letter model, float textSize);
+        LetterView GetLetter(RectTransform at, ILetter model, float textSize);
     }
 }

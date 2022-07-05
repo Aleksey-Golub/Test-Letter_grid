@@ -6,6 +6,7 @@ namespace Assets.CodeBase.View
     internal class PositiveIntInputField : MonoBehaviour
     {
         [SerializeField] private TMP_InputField _inputField;
+        [SerializeField] private int _defaultValue = 1;
 
         public int Value { get; private set; }
 
@@ -26,7 +27,7 @@ namespace Assets.CodeBase.View
                 }
             }
 
-            Value = 1;
+            Value = _defaultValue;
             _inputField.text = Value.ToString();
         }
     }

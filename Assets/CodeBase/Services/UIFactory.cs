@@ -12,7 +12,7 @@ namespace Assets.CodeBase.Services
 
         private readonly Stack<LetterView> _pool = new Stack<LetterView>();
 
-        public LetterView GetLetter(RectTransform at, Letter model, float textSize)
+        public LetterView GetLetter(RectTransform at, ILetter model, float textSize)
         {
             LetterView newLetterView;
             if (_pool.Count > 0)

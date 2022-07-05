@@ -1,5 +1,7 @@
+using Assets.CodeBase.Data;
 using Assets.CodeBase.Model;
 using Assets.CodeBase.View;
+using System;
 using System.Collections.Generic;
 
 namespace Assets.CodeBase.Presenter
@@ -7,9 +9,9 @@ namespace Assets.CodeBase.Presenter
     public class GridPresenter
     {
         private readonly IGridView _view;
-        private readonly GridModel _model;
+        private readonly IGridModel _model;
 
-        public GridPresenter(IGridView view, GridModel model)
+        public GridPresenter(IGridView view, IGridModel model)
         {
             _view = view;
             _model = model;
@@ -20,7 +22,7 @@ namespace Assets.CodeBase.Presenter
             _view.NeedGenerate += OnNeedGenerate;
             _view.NeedMix += OnNeedMix;
 
-            _model.Changed += OnGenerated;
+            _model.Generated += OnGenerated;
             _model.Mixed += OnMixed;
         }
 
@@ -29,7 +31,7 @@ namespace Assets.CodeBase.Presenter
             _view.NeedGenerate -= OnNeedGenerate;
             _view.NeedMix -= OnNeedMix;
 
-            _model.Changed -= OnGenerated;
+            _model.Generated -= OnGenerated;
             _model.Mixed -= OnMixed;
         }
 
@@ -38,9 +40,9 @@ namespace Assets.CodeBase.Presenter
             _view.ShowMix();
         }
 
-        private void OnGenerated(IReadOnlyList<Letter> letters, int width, int height)
+        private void OnGenerated(IReadOnlyList<ILetter> letters, int width, int height, Action<Vector3Data[]> callback)
         {
-            _view.ShowGenerated(letters, width, height);
+            _view.ShowGenerated(letters, width, height, callback);
         }
 
         private void OnNeedMix()

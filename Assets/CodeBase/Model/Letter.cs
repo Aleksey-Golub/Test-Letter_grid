@@ -3,7 +3,7 @@ using System;
 
 namespace Assets.CodeBase.Model
 {
-    public class Letter
+    public class Letter : ILetter
     {
         private static readonly string _symbols = "abcdefghijklmnopqrstuvwxyz";
 
@@ -14,7 +14,7 @@ namespace Assets.CodeBase.Model
 
         public string Litera { get; }
         public Vector3Data Position { get; set; }
-        
+
         internal static Letter GetRandom(Random _random)
         {
             int index = _random.Next(_symbols.Length);

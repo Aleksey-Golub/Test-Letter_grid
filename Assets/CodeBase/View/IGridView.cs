@@ -1,4 +1,5 @@
-﻿using Assets.CodeBase.Model;
+﻿using Assets.CodeBase.Data;
+using Assets.CodeBase.Model;
 using Assets.CodeBase.Services;
 using System;
 using System.Collections.Generic;
@@ -13,7 +14,7 @@ namespace Assets.CodeBase.View
         event Action NeedMix;
 
         void Construct(IUIFactory factory);
-        void ShowGenerated(IReadOnlyList<Letter> letters, int width, int height);
+        void ShowGenerated(IReadOnlyList<ILetter> letters, int width, int height, Action<Vector3Data[]> callback);
         void ShowMix();
     }
 }

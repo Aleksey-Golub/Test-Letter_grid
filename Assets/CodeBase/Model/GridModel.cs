@@ -1,13 +1,14 @@
+using Assets.CodeBase.Data;
 using Assets.CodeBase.Model.MixingStrategy;
 using System;
 using System.Collections.Generic;
 
 namespace Assets.CodeBase.Model
 {
-    public class GridModel
+    public class GridModel : IGridModel
     {
         private readonly List<Letter> _letters;
-        private readonly System.Random _random;
+        private readonly Random _random;
         private int _width;
         private int _height;
         private readonly IMixStrategy _mixer;
@@ -17,13 +18,13 @@ namespace Assets.CodeBase.Model
             _mixer = mixStrategy;
 
             _letters = new List<Letter>();
-            _random = new System.Random();
+            _random = new Random();
         }
 
-        public event Action<IReadOnlyList<Letter>, int, int> Changed;
+        public event Action<IReadOnlyList<ILetter>, int, int, Action<Vector3Data[]>> Generated;
         public event Action Mixed;
 
-        internal void Mix()
+        public void Mix()
         {
             _mixer.Mix(randomizer: _random, collection: _letters);
 
@@ -40,7 +41,13 @@ namespace Assets.CodeBase.Model
             for (int i = 0; i < count; i++)
                 _letters.Add(Letter.GetRandom(_random));
 
-            Changed?.Invoke(_letters, _width, _height);
+            Generated?.Invoke(_letters, _width, _height, SetPositions);
+        }
+
+        private void SetPositions(Vector3Data[] datasPos)
+        {
+            for (int i = 0; i < _letters.Count; i++)
+                _letters[i].Position = datasPos[i];
         }
     }
 }

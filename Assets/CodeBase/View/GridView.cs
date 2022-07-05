@@ -41,9 +41,9 @@ namespace Assets.CodeBase.View
             StartCoroutine(ShowMixRoutine());
         }
 
-        public void ShowGenerated(IReadOnlyList<Letter> letters, int width, int height)
+        public void ShowGenerated(IReadOnlyList<ILetter> letters, int width, int height, Action<Vector3Data[]> callback)
         {
-            StartCoroutine(ShowGeneratedRoutine(letters, width, height));
+            StartCoroutine(ShowGeneratedRoutine(letters, width, height, callback));
         }
 
         private IEnumerator ShowMixRoutine()
@@ -72,7 +72,7 @@ namespace Assets.CodeBase.View
             Interactable = true;
         }
 
-        private IEnumerator ShowGeneratedRoutine(IReadOnlyList<Letter> letters, int width, int height)
+        private IEnumerator ShowGeneratedRoutine(IReadOnlyList<ILetter> letters, int width, int height, Action<Vector3Data[]> callback)
         {
             Interactable = false;
 
@@ -92,12 +92,12 @@ namespace Assets.CodeBase.View
             _container.SetLayout(false);
 
             yield return null;
-            CalculateAndSavePosition(letters);
+            CalculateAndSavePosition(letters, callback);
 
             Interactable = true;
         }
 
-        private void GenerateViews(IReadOnlyList<Letter> letters, float size)
+        private void GenerateViews(IReadOnlyList<ILetter> letters, float size)
         {
             for (int i = 0; i < letters.Count; i++)
             {
@@ -114,16 +114,20 @@ namespace Assets.CodeBase.View
             return size;
         }
 
-        private void CalculateAndSavePosition(IReadOnlyList<Letter> letters)
+        private void CalculateAndSavePosition(IReadOnlyList<ILetter> letters, Action<Vector3Data[]> callback)
         {
+            Vector3Data[] datasPos = new Vector3Data[letters.Count];
             for (int i = 0; i < _lettersView.Count; i++)
             {
                 Vector3 pos = _lettersView[i].RectTransform.localPosition;
                 _lettersView[i].RectTransform.SetAnchors(at: 0.5f);
                 _lettersView[i].RectTransform.localPosition = pos;
 
-                letters[i].Position = _lettersView[i].RectTransform.localPosition.AsVectorData();
+                //letters[i].Position = _lettersView[i].RectTransform.localPosition.AsVectorData();
+                datasPos[i] = _lettersView[i].RectTransform.localPosition.AsVectorData();
             }
+
+            callback(datasPos);
         }
 
         private void HideAll()

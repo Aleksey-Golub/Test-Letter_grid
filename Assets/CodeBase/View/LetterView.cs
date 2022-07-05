@@ -9,12 +9,12 @@ namespace Assets.CodeBase.View
     {
         [SerializeField] private TextMeshProUGUI _text;
 
-        private Letter _model;
+        private ILetter _model;
         private Vector3 _startPosition;
 
         [field: SerializeField] public RectTransform RectTransform { get; private set; }
 
-        public void Construct(Letter model, float textSize)
+        public void Construct(ILetter model, float textSize)
         {
             _model = model;
             _text.text = _model.Litera;
